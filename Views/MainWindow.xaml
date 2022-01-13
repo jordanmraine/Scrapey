@@ -3,12 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ViewModels;assembly=ViewModels"
+        xmlns:local="clr-namespace:ViewModels;assembly=ViewModels" xmlns:local1="clr-namespace:Views.Converters"
         mc:Ignorable="d"
-        Title="Search Rankings" Height="250" Width="400">
+        Title="Search Rankings" Height="220" Width="550">
     <Window.DataContext>
         <local:SearchRankingsViewModel />
     </Window.DataContext>
+    <Window.Resources>
+        <local1:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+    </Window.Resources>
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -24,11 +27,11 @@
         <Label Content="Search Text:" Grid.Row="0" Grid.Column="0" Height="28" HorizontalAlignment="Right" VerticalAlignment="Top" />
         <Label Content="URL:" Grid.Row="1" Grid.Column="0" Height="28" HorizontalAlignment="Right" VerticalAlignment="Top" />
         <Label Content="Rankings:" Grid.Row="3" Grid.Column="0" Height="28" HorizontalAlignment="Right" VerticalAlignment="Top" />
-        <Label Content="{Binding Rankings}" Grid.Row="3" Grid.Column="1" Height="28" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <Label Content="{Binding Rankings}" Grid.Row="3" Grid.Column="1" Height="28" HorizontalAlignment="Left" VerticalAlignment="Top"  />
 
-        <TextBox Text="{Binding Path=SearchText, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" Height="22" VerticalAlignment="Top" Margin="6,2,0,0" />
-        <TextBox Text="{Binding Path=Url, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" Height="22" VerticalAlignment="Top" Margin="6,2,0,0" />
+        <TextBox Text="{Binding Path=SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1" Height="22" VerticalAlignment="Top" Margin="6,2,0,0" />
+        <TextBox Text="{Binding Path=Url, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Height="22" VerticalAlignment="Top" Margin="6,2,0,0" />
 
-        <Button Grid.Row="2" Grid.Column="1" Height="22" Content="Get Rankings" Margin="6,0,0,0" />
+        <Button Command="{Binding SearchCommand}" Content="{Binding SearchButtonText}" IsEnabled="{Binding Path=IsBusy, Converter={StaticResource InverseBooleanConverter}}" Grid.Row="2" Grid.Column="1" Height="22" Margin="6,0,0,0" />
     </Grid>
 </Window>
