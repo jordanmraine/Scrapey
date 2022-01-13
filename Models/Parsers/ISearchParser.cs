@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Models.Parsers
+﻿namespace Models.Parsers
 {
     public interface ISearchParser
     {
-        SearchResult ParseSearch(string html);
+        IEnumerable<SearchResult> ParseSearchHtml(string html);
     }
 }

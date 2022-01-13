@@ -13,6 +13,9 @@ namespace Models.Clients
             this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         }
 
+        /// <summary>
+        /// Returns the raw HTML of a search with the given <paramref name="searchText"/> and <paramref name="numberOfResults"/>.
+        /// </summary>
         public async Task<string> SearchAsync(string searchText, int numberOfResults)
         {
             if (string.IsNullOrEmpty(searchText)) throw new ArgumentException($"{nameof(searchText)} cannot be null or empty.", nameof(searchText));
