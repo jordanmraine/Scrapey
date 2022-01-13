@@ -4,6 +4,7 @@ namespace Models.Clients
 {
     public class SearchClient : ISearchClient
     {
+        private const string chromeUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36";
         private const string baseSearchAddress = "https://www.google.com/search";
 
         private readonly HttpClient httpClient;
@@ -11,6 +12,8 @@ namespace Models.Clients
         public SearchClient(HttpClient httpClient)
         {
             this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+
+            this.httpClient.DefaultRequestHeaders.Add("User-Agent", chromeUserAgent);
         }
 
         /// <summary>
@@ -40,8 +43,8 @@ namespace Models.Clients
             UriBuilder builder = new(baseSearchAddress);
 
             var query = HttpUtility.ParseQueryString(builder.Query);
-            query["q"] = searchText;
             query["num"] = numberOfResults.ToString();
+            query["q"] = searchText;
 
             builder.Query = query.ToString();
 
