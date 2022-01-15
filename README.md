@@ -11,5 +11,7 @@ A .NET 6 WPF application to manually scrape Google and rank URLs on a given sear
 The following changes could be made to improve the application:
 - More reliable methods to retrieve data (e.g. Google API, HTML Agility Pack)
 - Move the scraping & parsing code out of the Models project and into a Services project
+- More unit tests
 - UI testing project
 - End-to-end testing project
+- Exception handling
